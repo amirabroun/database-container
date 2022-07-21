@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+
+    mariadb:
+        container_name: DD-framework
+        image: mariadb
+        restart: always
+        environment:
+            MYSQL_DATABASE: DD-framework
+            MYSQL_ROOT_USER: root
+            MYSQL_ROOT_PASSWORD: password
+        volumes:
+            - ./mariadb:/var/lib/mariadb
+        ports:
+            - 3306:3306
+
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        links:
+            - mariadb
+        environment:
+            UPLOAD_LIMIT: 3000M
+            PMA_HOST: mariadb
+        ports:
+            - 8080:80
+
+networks:
+    default:
+        external: true
+        name: production
