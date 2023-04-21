@@ -1,0 +1,5 @@
+.env
+.vscode/
+storage/
+.idea/ 
+docker-compose.override.yaml
